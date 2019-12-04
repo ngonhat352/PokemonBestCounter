@@ -19,7 +19,10 @@ def getTypes(pokemonName, data):
     if it is the alolan form AND 'Castform (Ice)' if it has multiple forms and elements"""
     for row in data:
         if pokemonName.lower() == row['Pokemon Name'].lower():
-            return row['Type 1'],row['Type 2']
+            if row['Type 2'] != '':
+                return [row['Type 1'],row['Type 2']]
+            else:
+                return [row['Type 1']]
     return "Sorry we don't have that Gen yet D:"
 
 def getFastMoves(pokemonName, data):
@@ -88,3 +91,5 @@ def compareAllDPS(arrayOfPokemon,pokemonData, dpsData):
 
 # for i in compareAllDPS(['Mewtwo','Machamp','Groudon']):
 #     print(i)
+
+print(getTypes('snivy',readCSV('pokedex.csv')))
