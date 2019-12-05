@@ -28,9 +28,11 @@ def top10ofType(type, pokemonData, dpsData):
         result.append(dpsList[i])
     return result
 
+
 # top10ofAll = top10ofAll(pokedexData,dpsData)
 # top10ofFire = top10ofType('Fire',pokedexData,dpsData)
 top10ofRock = top10ofType('Rock',pokedexData,dpsData)
+
 
 for i in top10ofRock:
     print(i)

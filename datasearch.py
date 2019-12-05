@@ -83,7 +83,9 @@ def compareAllDPS(arrayOfPokemon,pokemonData, dpsData):
 
     result = []
     for i in a:
-        result.append(i[0]) #get the strongest combination for each pokemon!
+        if i != []:
+            result.append(i[0])
+
     result.sort(reverse=True,key=functionForSortByDPS)
 
     return result
@@ -92,4 +94,4 @@ def compareAllDPS(arrayOfPokemon,pokemonData, dpsData):
 # for i in compareAllDPS(['Mewtwo','Machamp','Groudon']):
 #     print(i)
 
-print(getTypes('snivy',readCSV('pokedex.csv')))
+# print(getTypes('snivy',readCSV('pokedex.csv')))
