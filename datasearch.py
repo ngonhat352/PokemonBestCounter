@@ -1,5 +1,4 @@
 import csv
-from decimal import Decimal
 
 def readCSV(csvFilename):
     """This is a function to read in and return data from a CSV file
@@ -14,7 +13,7 @@ def readCSV(csvFilename):
     fileObj.close()
     return table
 
-def getTypes(pokemonName, data):
+def getTypesByPKM(pokemonName, data):
     """Given a pokemon name, get its type. BUT: put 'Diglett (Alolan)'
     if it is the alolan form AND 'Castform (Ice)' if it has multiple forms and elements"""
     for row in data:
@@ -41,8 +40,10 @@ def getChargedMoves(pokemonName, data):
 
     return "Sorry we don't have that Gen yet D:"
 
+###################### DPS calculations and sortings ####################################
+
 def getDPS(pokemonName, fastMove, chargedMove, data):
-    """Given the pokemon name, fast move and charged move, get its DPS """
+    """Given a pokemon name, one of its fast moves and charged moves, get its DPS """
     for row in data:
         if (pokemonName.lower() == row['Pokemon'].lower() and (fastMove == row['Fast Move'])
                 and (chargedMove==row['Charged Move'])):
@@ -74,24 +75,88 @@ def getAllDPS(pokemonName, pokemonData, dpsData):
     return combinations
 
 def functionForSortByDPS(list):
+    """TO be used for array.sort() to sort the list of dictionaries by the value of key 'DPS' """
     return list['DPS']
 
 def compareAllDPS(arrayOfPokemon,pokemonData, dpsData):
-    a=[]
+    """Given a list of pokemon, return a list of best moves possible of those pokemon and sort them by strong to weak DPS"""
+    allDPS=[]
     for pokemon in arrayOfPokemon:
-        a.append(getAllDPS(pokemon,pokemonData,dpsData))
+        allDPS.append(getAllDPS(pokemon,pokemonData,dpsData))
 
     result = []
-    for i in a:
+    for i in allDPS:
         if i != []:
-            result.append(i[0])
+            result.append(i[0])   #i[0] because we only care about the best moves combination for each pokemon
 
     result.sort(reverse=True,key=functionForSortByDPS)
-
     return result
 
+######################## Type advantages and disadvantages calculations############################
+def getTypeOfFMove(fmove,data):
+    """Given the name of a fast move, return the type of that move. Will use movesquick.csv"""
+    for row in data:
+        if row['ï»¿Quick Move'] == fmove:
+            return row['Type']
+    return "Not a valid move"
 
-# for i in compareAllDPS(['Mewtwo','Machamp','Groudon']):
-#     print(i)
+def getTypeOfCMove(cmove,data):
+    """Given the name of a charged move, return the type of that move. Will use movescharge.csv"""
+    for row in data:
+        if row['ï»¿Charge Move'] == cmove:
+            return row['Type']
+    return "Not a valid move"
 
-# print(getTypes('snivy',readCSV('pokedex.csv')))
+def getTypesOfAllFMoves(pokemon,pokedex,movesData):
+    """Given a pokemon, get the types of all of its fast moves"""
+    allFMoves = getFastMoves(pokemon,pokedex)
+
+    result = []
+    for oneMove in allFMoves:
+        type = getTypeOfFMove(oneMove,movesData)
+        if type != 'Not a valid move':
+            result.append([type,oneMove])
+    return result
+
+def getTypesOfAllCMoves(pokemon,pokedex,movesData):
+    """Given a pokemon, get the types of all of its charged moves"""
+    allCMoves = getChargedMoves(pokemon,pokedex)
+
+    result = []
+    for oneMove in allCMoves:
+        type = getTypeOfCMove(oneMove,movesData)
+        if type != 'Not a valid move':
+            result.append([type,oneMove])
+    return result
+
+def basicTypeAdvantage(typeAttacker, typeDefender, typedata):
+    '''Check type advantages'''
+    for row in typedata:
+        if row['Attack'].lower() == typeAttacker.lower():
+            return float(row[typeDefender.capitalize()])
+    return "Type not valid"
+
+def calculateTypeAdvantage(attackPKM,defensePKM,pokedex,typesData, fmoveData, cmoveData):
+    typesOfAttackPKM = getTypesByPKM(attackPKM,pokedex) #intrinsic type of the attack pokemon
+    typesOfDefensePKM = getTypesByPKM(defensePKM,pokedex) #intrinsic type of the defense pokemon
+
+    typesOfAttackFMoves = getTypesOfAllCMoves(attackPKM,pokedex,fmoveData) #types of all the fast moves of the attack pokemon
+    typesOfAttackCMoves = getTypesOfAllCMoves(attackPKM,pokedex,cmoveData) #types of all the charged moves of the attack pokemon
+
+    typesOfDefenseFMoves = getTypesOfAllFMoves(defensePKM,pokedex,fmoveData)
+    typesOfDefenseCMoves = getTypesOfAllCMoves(defensePKM,pokedex,cmoveData)
+
+    result = 1
+
+    for i in typesOfAttackPKM: #TODO: not loop through the intrinsic type of the attack pkm rn, but the types of its possible moves
+        for j in typesOfDefensePKM:
+            result = result* basicTypeAdvantage(i,j,typesData) #TODO: not multiply by 2 if doubly effective: *2.56
+            print("Attack type: "+i+", Defense Type: "+j+", type advantage: "+str(result))
+
+    for i in typesOfDefensePKM: #TODO: not loop through the intrinsic type of the defense pkm rn, but the types of its possible moves
+        for j in typesOfAttackPKM:
+            result = result/ basicTypeAdvantage(i,j,typesData)
+            print("Attack type: "+i+", Defense Type: "+j+", type advantage: "+str(result))
+    return result
+
+# print(calculateTypeAdvantage('Gengar','Snorlax',readCSV('pokedex.csv'),readCSV('types.csv')))
