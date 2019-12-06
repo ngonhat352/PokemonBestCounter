@@ -44,4 +44,17 @@ def getTypesOfAllCMoves(pokemon):
 
 
 def getFMovesOfType(type):
-    return ''
+    result = []
+    for row in fmovesData:
+        if row['Type'] == type:
+            result.append(row['ï»¿Quick Move'])
+    return result
+
+
+def getCMovesOfType(type):
+    result = []
+    for row in cmovesData:
+        if row['Type'] == type:
+            result.append(row['ï»¿Charge Move'])
+    return result
+

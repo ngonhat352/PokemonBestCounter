@@ -10,5 +10,16 @@ def lookupTypeAdvantage(typeAttacker, typeDefender):
     for row in typesData:
         if row['Attack'].lower() == typeAttacker.lower():
             return float(row[typeDefender.capitalize()])
-    return "Type not valid"
+    return 0
 
+
+# def typeAdvantage2PKM(attacker,defender):
+#     typeAdvantage = 1
+#     for i in getTypesByPKM(attacker):
+#         for j in getTypesByPKM(defender):
+#             typeAdvantage = typeAdvantage* lookupTypeAdvantage(i, j)
+#
+#     for j in getTypesByPKM(defender):
+#         for i in getTypesByPKM(attacker):
+#             typeAdvantage = typeAdvantage / lookupTypeAdvantage(i, j)
+#     return typeAdvantage

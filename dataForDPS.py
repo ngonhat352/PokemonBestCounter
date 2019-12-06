@@ -1,5 +1,7 @@
-
+from bestTypeToChoose import calculateTypeAdvantage
 from dataFromPokedex import getFastMoves, getChargedMoves, readCSV
+from findPokemonToFight import findPKMToFight
+from movesetTypes import getTypeOfFMove, getTypeOfCMove
 
 dpsData = readCSV('databases/comprehensive_dps.csv')
 
@@ -13,12 +15,12 @@ def getDPS(pokemonName, fastMove, chargedMove):
 
 ###################### DPS calculations and sortings ####################################
 
-def getAllDPS(pokemonName):
+def getAllDPS(attacker, defender):
     """Given a pokemon, give all of its possible fast moves and charged moves combinations with its DPS,
     then sort those combinations from strongest to weakest"""
     combinations = []
-    fastMoves = getFastMoves(pokemonName)
-    chargedMoves = getChargedMoves(pokemonName)
+    fastMoves = getFastMoves(attacker)
+    chargedMoves = getChargedMoves(attacker)
     if fastMoves == "Sorry we don't have that Gen yet D:":
         return "Sorry we don't have that Gen yet D:"
     for f in fastMoves:
@@ -26,21 +28,25 @@ def getAllDPS(pokemonName):
             if f == '' or c == '':
                 break
             oneDPS = {}
-            oneDPS['Pokemon:'] = pokemonName
+            oneDPS['Pokemon:'] = attacker
             oneDPS['Fast Move']=f
             oneDPS['Charged Move']=c
-            oneDPS['DPS'] = float(getDPS(pokemonName, f, c)) # nhân cho typeAdvantage() (1 nếu ko có, 2 nếu có, 1/2 nếu bị resisted)
+
+            #TODO: lost priority of type!
+            oneDPS['DPS'] = float(getDPS(attacker, f, c)) \
+            * (calculateTypeAdvantage(getTypeOfFMove(f), defender) + calculateTypeAdvantage(getTypeOfCMove(c),defender))
+
             combinations.append(oneDPS)
             # if float(getDPS(pokemonName, f, c))==0:
             #     print(pokemonName,f,c)
         combinations = sorted(combinations,key=lambda x: (x['DPS']),reverse=True)
     return combinations
 
-def compareAllDPS(arrayOfPokemon):
+def compareAllDPS(arrayOfPokemon,defender):
     """Given a list of pokemon, return a list of best moves possible of those pokemon and sort them by strong to weak DPS"""
     allDPS=[]
     for pokemon in arrayOfPokemon:
-        allDPS.append(getAllDPS(pokemon))
+        allDPS.append(getAllDPS(pokemon,defender))
 
     result = []
     for i in allDPS:
@@ -49,3 +55,6 @@ def compareAllDPS(arrayOfPokemon):
 
     result = sorted(result, key=lambda x: (x['DPS']), reverse=True)
     return result
+
+for i in compareAllDPS(findPKMToFight('Emboar'),'Emboar'):
+    print(i)

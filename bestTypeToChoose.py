@@ -1,7 +1,6 @@
 from dataForTypeAdvantage import lookupTypeAdvantage
 from dataFromPokedex import getTypesByPKM
-
-
+from movesetTypes import getTypesOfAllFMoves, getTypesOfAllCMoves
 
 listOfTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire',
                'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison',
@@ -48,8 +47,8 @@ def calculateAdvDefendingToPKM(type, pokemon):
     return score
 
 
-def bestTypesToChoose(pokemon):
-    """Return the best 5 types to attack the input pokemon"""
+def best3TypesToChoose(pokemon):
+    """Return the best 3 types to attack the input pokemon"""
     result = []
     for i in listOfTypes:
         result.append({'Type': i, 'Type Advantage': calculateTypeAdvantage(i, pokemon),
@@ -59,10 +58,10 @@ def bestTypesToChoose(pokemon):
     # prioritize typeAdvantage, then if equal, rank according to score
     # TODO: THEN MULTIPLY TYPE ADVANTAGE TO DPS => WHERE??
 
-    return [result[0],result[1],result[2],result[3],result[4]]  #Top 5 types
+    return [result[0],result[1],result[2]]  #Top 3 types
 
 
-print(bestTypesToChoose('Poliwrath'))
+# print(best3TypesToChoose('Poliwrath'))
 
 
 
