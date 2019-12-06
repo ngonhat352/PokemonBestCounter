@@ -29,6 +29,8 @@ def findPKMToFight(pokemon):
     fMovesList = []
     cMovesList = []
     pokemonList = []
+    fmovePkm = []
+    cmovePkm = []
 
     for i in range(3):
         aType = top3Types[i]['Type']
@@ -36,14 +38,21 @@ def findPKMToFight(pokemon):
         cMovesList = cMovesList + getCMovesOfType(aType)
 
     for fmove in fMovesList:
-        pokemonList = pokemonList + getPKMofFMove(fmove)
+        fmovePkm = fmovePkm + getPKMofFMove(fmove)
 
     for cmove in cMovesList:
-        pokemonList = pokemonList + getPKMofCMove(cmove)
+        cmovePkm =  cmovePkm+getPKMofCMove(cmove)
+
+    for i in fmovePkm:
+        if i not in pokemonList:
+            pokemonList.append(i)
+
+    for i in cmovePkm:
+        if i not in pokemonList:
+            pokemonList.append(i)
 
     pokemonList.sort()
     #TODO: remove duplicates
-
     return pokemonList
 
 

@@ -61,7 +61,7 @@ def best3TypesToChoose(pokemon):
     return [result[0],result[1],result[2]]  #Top 3 types
 
 
-# print(best3TypesToChoose('Poliwrath'))
+# print(best3TypesToChoose('Hydreigon'))
 
 
 
