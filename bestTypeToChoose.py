@@ -56,35 +56,6 @@ def best3TypesToChoose(pokemon):
 
     result = sorted(result, key=lambda x: (x['Type Advantage'], x['Score']), reverse=True)
     # prioritize typeAdvantage, then if equal, rank according to score
-    # TODO: THEN MULTIPLY TYPE ADVANTAGE TO DPS => WHERE??
 
     return [result[0],result[1],result[2]]  #Top 3 types
 
-
-# print(best3TypesToChoose('Hydreigon'))
-
-
-
-# def calculateTypeAdvantage(attackPKM,defensePKM,pokedex,typesData, fmoveData, cmoveData):
-#     typesOfAttackPKM = getTypesByPKM(attackPKM,pokedex) #intrinsic type of the attack pokemon
-#     typesOfDefensePKM = getTypesByPKM(defensePKM,pokedex) #intrinsic type of the defense pokemon
-#
-#     typesOfAttackFMoves = getTypesOfAllCMoves(attackPKM,pokedex,fmoveData) #types of all the fast moves of the attack pokemon
-#     typesOfAttackCMoves = getTypesOfAllCMoves(attackPKM,pokedex,cmoveData) #types of all the charged moves of the attack pokemon
-#
-#     typesOfDefenseFMoves = getTypesOfAllFMoves(defensePKM,pokedex,fmoveData)
-#     typesOfDefenseCMoves = getTypesOfAllCMoves(defensePKM,pokedex,cmoveData)
-#
-#     result = 1
-#
-#     for i in typesOfAttackPKM:
-#         for j in typesOfDefensePKM:
-#             result = result* lookupTypeAdvantage(i,j,typesData)
-#             print("Attack type: "+i+", Defense Type: "+j+", type advantage: "+str(result))
-#
-#     for i in typesOfDefensePKM:
-#         for j in typesOfAttackPKM:
-#             result = result/ lookupTypeAdvantage(i,j,typesData)
-#             print("Attack type: "+i+", Defense Type: "+j+", type advantage: "+str(result))
-#     return result
-# print(calculateTypeAdvantage('Gengar','Snorlax',readCSV('pokedex.csv'),readCSV('types.csv')))

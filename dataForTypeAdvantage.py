@@ -1,4 +1,4 @@
-from dataFromPokedex import readCSV, getTypesByPKM, getChargedMoves, getFastMoves
+from dataFromPokedex import readCSV
 
 
 
@@ -11,15 +11,3 @@ def lookupTypeAdvantage(typeAttacker, typeDefender):
         if row['Attack'].lower() == typeAttacker.lower():
             return float(row[typeDefender.capitalize()])
     return 0
-
-
-# def typeAdvantage2PKM(attacker,defender):
-#     typeAdvantage = 1
-#     for i in getTypesByPKM(attacker):
-#         for j in getTypesByPKM(defender):
-#             typeAdvantage = typeAdvantage* lookupTypeAdvantage(i, j)
-#
-#     for j in getTypesByPKM(defender):
-#         for i in getTypesByPKM(attacker):
-#             typeAdvantage = typeAdvantage / lookupTypeAdvantage(i, j)
-#     return typeAdvantage

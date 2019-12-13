@@ -2,24 +2,22 @@ from dataFromPokedex import readCSV
 from bestTypeToChoose import best3TypesToChoose
 from movesetTypes import getFMovesOfType, getCMovesOfType
 
-pokedex = readCSV('databases/pokedex.csv')
+pokedex = readCSV('databases/comprehensive_dps.csv')
 
 def getPKMofFMove(fmove):
     """Get all the pokemon that have that fast moveset"""
     result = []
     for row in pokedex:
-        if row['fmove1'] == fmove or row['fmove2'] == fmove or row['fmove3'] == fmove \
-        or row['fmove4'] == fmove or row['fmove5'] == fmove or row['fmove6'] == fmove or row['fmove7'] == fmove:
-            result.append(row['Pokemon Name'])
+        if row['Fast Move'] == fmove:
+            result.append(row['Pokemon'])
     return result
 
 def getPKMofCMove(cmove):
     """Get all the pokemon that have that charged moveset"""
     result = []
     for row in pokedex:
-        if row['cmove1'] == cmove or row['cmove2'] == cmove or row['cmove3'] == cmove or row['cmove4'] == cmove \
-        or row['cmove5'] == cmove or row['cmove6'] == cmove or row['cmove7'] == cmove or row['cmove8'] == cmove:
-            pokemon = row['Pokemon Name']
+        if row['Charged Move'] == cmove:
+            pokemon = row['Pokemon']
             if pokemon not in result:
                 result.append(pokemon)
     return result
@@ -32,10 +30,10 @@ def findPKMToFight(pokemon):
     fmovePkm = []
     cmovePkm = []
 
-    for i in range(3):
-        aType = top3Types[i]['Type']
-        fMovesList = fMovesList + getFMovesOfType(aType)
-        cMovesList = cMovesList + getCMovesOfType(aType)
+    for i in top3Types:
+        desiredType = i['Type']
+        fMovesList = fMovesList + getFMovesOfType(desiredType)
+        cMovesList = cMovesList + getCMovesOfType(desiredType)
 
     for fmove in fMovesList:
         fmovePkm = fmovePkm + getPKMofFMove(fmove)
@@ -51,12 +49,11 @@ def findPKMToFight(pokemon):
         if i not in pokemonList:
             pokemonList.append(i)
 
-    pokemonList.sort()
-    #TODO: remove duplicates
+    # pokemonList.sort()
     return pokemonList
 
 
-findPKMToFight('Moltres')
+# print(findPKMToFight('Moltres'))
 
 
 

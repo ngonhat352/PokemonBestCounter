@@ -15,6 +15,7 @@ def readCSV(csvFilename):
     return table
 
 pokedexData = readCSV('databases/pokedex.csv')
+dpsData = readCSV('databases/comprehensive_dps.csv')
 
 def getTypesByPKM(pokemonName):
     """Given a pokemon name, get its type. BUT: put 'Diglett (Alolan)'
@@ -29,16 +30,19 @@ def getTypesByPKM(pokemonName):
 
 def getFastMoves(pokemonName):
     """Given a pokemon name, get its possible fast move"""
-    for row in pokedexData:
-        if pokemonName.lower() == row['Pokemon Name'].lower():
-            return row['fmove1'],row['fmove2'],row['fmove3'],row['fmove4'],row['fmove5'],row['fmove6'],row['fmove7']
-    return "Sorry we don't have that Gen yet D:"
+    result = []
+    for row in dpsData:
+        if pokemonName.lower() == row['Pokemon'].lower():
+            if row['Fast Move'] not in result:
+                result.append(row['Fast Move'])
+    return result
 
 def getChargedMoves(pokemonName):
     """Given a pokemon name, get its possible fast move"""
-    for row in pokedexData:
-        if pokemonName.lower() == row['Pokemon Name'].lower():
-            return row['cmove1'],row['cmove2'],row['cmove3'],row['cmove4'],row['cmove5'],\
-                   row['cmove6'],row['cmove7'],row['cmove8']
+    result = []
+    for row in dpsData:
+        if pokemonName.lower() == row['Pokemon'].lower():
+            if row['Charged Move'] not in result:
+                result.append(row['Charged Move'])
+    return result
 
-    return "Sorry we don't have that Gen yet D:"
