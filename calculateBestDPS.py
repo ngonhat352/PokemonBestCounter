@@ -58,11 +58,19 @@ def compareAllDPS(arrayOfPokemon,defender):
 
     result = []
     for i in allDPS:
-        if i != [] :
+        if i != []:
             result.append(i[0])   #i[0] because we only care about the best moves combination for each pokemon
 
     result = sorted(result, key=lambda x: (x['Damage']), reverse=True)
+
+    for i in result:
+        del i['DPS']
+        del i['TDO']
+        del i['Damage']
+        del i['Type Adv']
+
     return result
 
 # Cases that fail: Hydreigon,
+
 

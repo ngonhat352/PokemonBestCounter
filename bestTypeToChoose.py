@@ -14,7 +14,6 @@ def calculateTypeAdvantage(attackType, defensePKM):
     # attackType attacking the defense pkm
     for i in typesOfDefensePKM:
         typeAdvantage = typeAdvantage * lookupTypeAdvantage(attackType, i)
-
     return typeAdvantage
 
 def calculateAdvDefendingToPKM(type, pokemon):

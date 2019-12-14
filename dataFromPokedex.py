@@ -26,7 +26,8 @@ def getTypesByPKM(pokemonName):
                 return [row['Type 1'],row['Type 2']]
             else:
                 return [row['Type 1']]
-    return "Sorry we don't have that Gen yet D:"
+    return []
+    #TODO: given a bad input, break that while loop only
 
 def getFastMoves(pokemonName):
     """Given a pokemon name, get its possible fast move"""
@@ -46,3 +47,13 @@ def getChargedMoves(pokemonName):
                 result.append(row['Charged Move'])
     return result
 
+def getPkmByTypes(type1,type2=''):
+    for row in pokedexData:
+        if ((row['Type 1'] == type1 and row['Type 2'] == type2)
+        or (row['Type 1'] == type2 and row['Type 2'] == type1)):
+            if ('(' not in row['Pokemon Name']):
+                return row['Pokemon Name']
+    return 'None'
+
+# print(getTypesByPKM(getPkmByTypes('Normal')))
+# print(getPkmByTypes('Normal','Normal'))
