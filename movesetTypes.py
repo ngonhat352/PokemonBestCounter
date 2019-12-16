@@ -3,7 +3,6 @@ from dataFromPokedex import readCSV, getChargedMoves, getFastMoves
 '''This file has functions to get the type of a move and vice versa, get the moves of a type'''
 
 
-
 fmovesData = readCSV('databases/movesquick.csv')
 cmovesData = readCSV('databases/movescharge.csv')
 

@@ -4,7 +4,6 @@ from dataFromPokedex import readCSV
 
 dpsData = readCSV('databases/comprehensive_dps.csv')
 
-
 def getDPS(pokemonName, fastMove, chargedMove):
     """Given a pokemon name, one of its fast moves and charged moves, get its DPS """
     for row in dpsData:
