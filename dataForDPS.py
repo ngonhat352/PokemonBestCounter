@@ -1,5 +1,6 @@
 from dataFromPokedex import readCSV
-from bestPkmToChoose import findPKMToFight
+'''This file has functions to get the DPS and TDO given a Pokemon and the moveset'''
+
 
 dpsData = readCSV('databases/comprehensive_dps.csv')
 

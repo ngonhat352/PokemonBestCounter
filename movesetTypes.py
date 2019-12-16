@@ -1,5 +1,8 @@
 from dataFromPokedex import readCSV, getChargedMoves, getFastMoves
 
+'''This file has functions to get the type of a move and vice versa, get the moves of a type'''
+
+
 fmovesData = readCSV('databases/movesquick.csv')
 cmovesData = readCSV('databases/movescharge.csv')
 
@@ -30,7 +33,6 @@ def getTypesOfAllFMoves(pokemon):
             result.append([type, oneMove])
     return result
 
-
 def getTypesOfAllCMoves(pokemon):
     """Given a pokemon, get the types of all of its charged moves"""
     allCMoves = getChargedMoves(pokemon)
@@ -44,6 +46,7 @@ def getTypesOfAllCMoves(pokemon):
 
 
 def getFMovesOfType(type):
+    """Given a type, get all of the fast moves of that type"""
     result = []
     for row in fmovesData:
         if row['Type'] == type:
@@ -52,6 +55,7 @@ def getFMovesOfType(type):
 
 
 def getCMovesOfType(type):
+    """Given a type, get all of the charged moves of that type"""
     result = []
     for row in cmovesData:
         if row['Type'] == type:

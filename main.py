@@ -2,10 +2,13 @@ from bestPkmToChoose import findPKMToFight
 from calculateBestDPS import compareAllDPS
 import time
 from dataFromPokedex import readCSV
+'''This file has functions that actually runs the program and ask users for input.'''
+
 
 pokedexData = readCSV('databases/pokedex.csv')
 
 def main():
+    """Ask user for input and call getBestCounter() to solve it"""
     while(True):
         defenderPkm = input('Opponent: ').strip().lower()
 
@@ -27,6 +30,7 @@ def main():
 
 
 def getBestCounter(defenderPkm):
+    """This function does the printing and calling core functions of the algorithm"""
     print('Pokemon Name: '+defenderPkm.capitalize())
     if defenderPkm == 'None':
         print('\n')

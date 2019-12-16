@@ -1,8 +1,6 @@
 from dataFromPokedex import readCSV
+'''This file looks up type advantage scores from type advantage database'''
 
-
-
-######################## Type advantages and disadvantages calculations############################
 typesData = readCSV('databases/types.csv')
 
 def lookupTypeAdvantage(typeAttacker, typeDefender):

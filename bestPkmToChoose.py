@@ -1,6 +1,10 @@
 from dataFromPokedex import readCSV
 from bestTypeToChoose import best3TypesToChoose
 from movesetTypes import getFMovesOfType, getCMovesOfType
+'''This file will be used for the 2nd and 3rd steps. It has functions to get the Pokemon 
+that have the fast moves and charged moves of the desired type. 
+Those are the desired Pokemon that will be used to put in compareAllDPS() '''
+
 
 pokedex = readCSV('databases/comprehensive_dps.csv')
 
@@ -23,6 +27,7 @@ def getPKMofCMove(cmove):
     return result
 
 def findPKMToFight(pokemon):
+    """After .........................."""
     top3Types=best3TypesToChoose(pokemon)
     fMovesList = []
     cMovesList = []
@@ -51,9 +56,6 @@ def findPKMToFight(pokemon):
 
     # pokemonList.sort()
     return pokemonList
-
-
-# print(findPKMToFight('Moltres'))
 
 
 

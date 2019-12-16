@@ -1,11 +1,13 @@
-from bestPkmToChoose import findPKMToFight
 from bestTypeToChoose import calculateTypeAdvantage
 from dataForDPS import getDPS, getTDO
 from dataFromPokedex import getFastMoves, getChargedMoves, getTypesByPKM
 from movesetTypes import getTypeOfFMove, getTypeOfCMove
-
+'''This file is the last step of our algorithm.
+It has functions to calculate DPS and TDO of a Pokemon by itself and against an opponent'''
 
 def getAllDPS(pokemon):
+    """Given a pokemon, calculate all of its possible fast moves and charged moves combinations
+    with its DPS, then sort those combinations from strongest to weakest"""
     combinations = []
     fastMoves = getFastMoves(pokemon)
     chargedMoves = getChargedMoves(pokemon)
@@ -26,8 +28,8 @@ def getAllDPS(pokemon):
     return combinations
 
 def getAttackDPS(attacker, defender):
-    """Given a pokemon and a defender, calculate all of its possible fast moves and charged moves combinations with its DPS,
-    then sort those combinations from strongest to weakest"""
+    """Get all the movesets of the attacker Pokemon,
+    then calculate their damage with type advantage against the defender Pokemon"""
     movesets = getAllDPS(attacker)
     result = []
     for aMoveSet in movesets:
@@ -51,7 +53,8 @@ def getAttackDPS(attacker, defender):
     return result
 
 def compareAllDPS(arrayOfPokemon,defender):
-    """Given a list of pokemon, return a list of best moves possible of those pokemon and sort them by strong to weak DPS"""
+    """Given a list of pokemon, calculate the DPS against the defender pokemon
+    and then return a list of best moves possible of those pokemon."""
     allDPS=[]
     for pokemon in arrayOfPokemon:
         allDPS.append(getAttackDPS(pokemon,defender))
