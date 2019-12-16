@@ -5,6 +5,7 @@ from dataFromPokedex import readCSV
 '''This file has functions that actually runs the program and ask users for input.'''
 
 
+
 pokedexData = readCSV('databases/pokedex.csv')
 
 def main():

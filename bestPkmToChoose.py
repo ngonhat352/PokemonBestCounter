@@ -6,6 +6,7 @@ that have the fast moves and charged moves of the desired type.
 Those are the desired Pokemon that will be used to put in compareAllDPS() '''
 
 
+
 pokedex = readCSV('databases/comprehensive_dps.csv')
 
 def getPKMofFMove(fmove):

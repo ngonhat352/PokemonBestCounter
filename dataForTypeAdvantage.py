@@ -3,6 +3,7 @@ from dataFromPokedex import readCSV
 
 typesData = readCSV('databases/types.csv')
 
+
 def lookupTypeAdvantage(typeAttacker, typeDefender):
     '''Check type advantages'''
     for row in typesData:
