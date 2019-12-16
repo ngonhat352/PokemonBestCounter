@@ -5,6 +5,7 @@ from movesetTypes import getTypeOfFMove, getTypeOfCMove
 '''This file is the last step of our algorithm.
 It has functions to calculate DPS and TDO of a Pokemon by itself and against an opponent'''
 
+
 def getAllDPS(pokemon):
     """Given a pokemon, calculate all of its possible fast moves and charged moves combinations
     with its DPS, then sort those combinations from strongest to weakest"""

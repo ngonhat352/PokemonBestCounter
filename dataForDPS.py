@@ -1,7 +1,6 @@
 from dataFromPokedex import readCSV
 '''This file has functions to get the DPS and TDO given a Pokemon and the moveset'''
 
-
 dpsData = readCSV('databases/comprehensive_dps.csv')
 
 def getDPS(pokemonName, fastMove, chargedMove):

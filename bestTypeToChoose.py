@@ -5,7 +5,6 @@ from movesetTypes import getTypesOfAllFMoves, getTypesOfAllCMoves
 return the 3 types strongest against it by calculating type advantage and defense score'''
 
 
-
 listOfTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire',
                'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison',
                'Psychic', 'Rock', 'Steel', 'Water']
