@@ -34,7 +34,6 @@ def getAttackDPS(attacker, defender):
     movesets = getAllDPS(attacker)
     result = []
     for aMoveSet in movesets:
-        #TODO: CHECK FORMULA BELOW ...when choosing move, prioritize the type! => currently not have that (mewtwo!) + haven't calculated resistance
         f = aMoveSet['Fast Move']
         c = aMoveSet['Charged Move']
         typeF = getTypeOfFMove(f)
@@ -67,14 +66,7 @@ def compareAllDPS(arrayOfPokemon,defender):
 
     result = sorted(result, key=lambda x: (x['Damage']), reverse=True)
 
-    for i in result:
-        del i['DPS']
-        del i['TDO']
-        del i['Damage']
-        del i['Type Adv']
-
     return result
 
-# Cases that fail: Hydreigon,
 
 

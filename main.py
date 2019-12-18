@@ -37,6 +37,10 @@ def getBestCounter(defenderPkm):
     else:
         result = compareAllDPS(findPKMToFight(defenderPkm), defenderPkm)
         for i in range(10):
+            del result[i]['DPS']
+            del result[i]['TDO']
+            del result[i]['Damage']
+            del result[i]['Type Adv']
             print(result[i])
 
 main()
