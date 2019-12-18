@@ -54,7 +54,6 @@ def findPKMToFight(pokemon):
         if i not in pokemonList:
             pokemonList.append(i)
 
-    # pokemonList.sort()
     return pokemonList
 
 

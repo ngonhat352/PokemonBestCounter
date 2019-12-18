@@ -49,16 +49,3 @@ def getChargedMoves(pokemonName):
             if row['Charged Move'] not in result:
                 result.append(row['Charged Move'])
     return result
-
-def getPkmByTypes(type1,type2=''):
-    """Given the types, get a pokemon that has that type! Type 2 by default is blank - one-type Pokemon.
-    Used for testing"""
-    for row in pokedexData:
-        if ((row['Type 1'] == type1 and row['Type 2'] == type2)
-        or (row['Type 1'] == type2 and row['Type 2'] == type1)):
-            if ('(' not in row['Pokemon Name']):
-                return row['Pokemon Name']
-    return 'None'
-
-# print(getTypesByPKM(getPkmByTypes('Normal')))
-# print(getPkmByTypes('Normal','Normal'))

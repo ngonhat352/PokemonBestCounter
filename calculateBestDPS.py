@@ -25,7 +25,6 @@ def getAllDPS(pokemon):
             aMoveSet['DPS'] = float(getDPS(pokemon, f, c))
             aMoveSet['TDO'] = float(getTDO(pokemon,f,c))
             combinations.append(aMoveSet)
-            # combinations = sorted(combinations,key=lambda x: (x['DPS']),reverse=True)
     return combinations
 
 def getAttackDPS(attacker, defender):
